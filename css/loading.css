@@ -19,7 +19,6 @@ body:before {
   background-repeat:no-repeat;
   background-size:cover;
   background-position:center;
-  z-index:-1;
 }
 
 #indicator {
@@ -123,4 +122,5 @@ body:before {
 @keyframes blink {
   0%,50% { opacity:1; }
   51%,100% { opacity:0; }
+
 }
