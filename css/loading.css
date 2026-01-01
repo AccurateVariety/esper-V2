@@ -1,135 +1,126 @@
+html, body {
+  margin:0;
+  padding:0;
+  width:100%;
+  height:100%;
+}
 body {
-	margin:0;
-	padding:0;
-	overflow-x:hidden;
-	background:#0d0d0f;
+  overflow-x:hidden;
 }
-
-/* BACKGROUND */
 body:before {
-	content:"";
-	position:absolute;
-	inset:0;
-	background:
-		radial-gradient(circle at center,
-			rgba(56,245,162,0.08) 0%,
-			transparent 60%),
-		#0d0d0f;
+  content:"";
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:#232428;
+  background-image: url('https://preview.redd.it/ignore-dis-v0-v6vs0sxre2cf1.png?width=640&crop=smart&auto=webp&s=af3b6947645a900da2bb19d11a2503133217d385');
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+  z-index:-1;
 }
 
-/* MAIN INDICATOR */
 #indicator {
-	position:absolute;
-	top:50%;
-	left:50%;
-	transform:translate(-50%,-50%);
-	width:220px;
-	height:220px;
-	border-radius:50%;
-
-	display:flex;
-	align-items:center;
-	justify-content:center;
-	text-align:center;
-
-	font-family:'Orbitron', sans-serif;
-	font-size:18px;
-	color:#d5c999;
-	letter-spacing:3px;
-	text-transform:uppercase;
-	text-shadow:0 0 8px #38f5a2;
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  width:260px;
+  height:260px;
+  box-sizing:border-box;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:transparent;
+  border:none;
+  padding:0;
+  margin:0;
+  font-family:'Orbitron', sans-serif;
 }
 
-/* ===== OUTER DOT RING ===== */
-#indicator:before {
-	content:"";
-	position:absolute;
-	inset:0;
-	border-radius:50%;
-
-	/* single dot */
-	background:rgba(56,245,162,0.8);
-	width:4px;
-	height:4px;
-	top:50%;
-	left:50%;
-	transform-origin:0 0;
-
-	/* dot cloning */
-	box-shadow:
-		80px 0 rgba(56,245,162,0.5),
-		69px 40px rgba(56,245,162,0.4),
-		40px 69px rgba(56,245,162,0.6),
-		0 80px rgba(56,245,162,0.5),
-		-40px 69px rgba(56,245,162,0.4),
-		-69px 40px rgba(56,245,162,0.6),
-		-80px 0 rgba(56,245,162,0.5),
-		-69px -40px rgba(56,245,162,0.4),
-		-40px -69px rgba(56,245,162,0.6),
-		0 -80px rgba(56,245,162,0.5),
-		40px -69px rgba(56,245,162,0.4),
-		69px -40px rgba(56,245,162,0.6);
-
-	animation:
-		spinCCW 10s linear infinite,
-		flicker 3s ease-in-out infinite;
+#indicator::before {
+  content:"";
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:260px;
+  height:260px;
+  transform:translate(-50%, -50%) rotate(0deg);
+  box-sizing:border-box;
+  border-radius:50%;
+  border:3px solid rgba(120,255,200,0.6);
+  box-shadow:0 0 20px #38f5a2, inset 0 0 30px rgba(120,255,200,0.3);
+  animation: ring-spin 6s linear infinite;
 }
 
-/* ===== INNER DOT RING ===== */
-#indicator:after {
-	content:"";
-	position:absolute;
-	inset:25px;
-	border-radius:50%;
-
-	background:rgba(213,201,153,0.8);
-	width:3px;
-	height:3px;
-	top:50%;
-	left:50%;
-
-	box-shadow:
-		50px 0 rgba(213,201,153,0.6),
-		35px 35px rgba(213,201,153,0.4),
-		0 50px rgba(213,201,153,0.6),
-		-35px 35px rgba(213,201,153,0.4),
-		-50px 0 rgba(213,201,153,0.6),
-		-35px -35px rgba(213,201,153,0.4),
-		0 -50px rgba(213,201,153,0.6),
-		35px -35px rgba(213,201,153,0.4);
-
-	animation:
-		spinCW 6s linear infinite,
-		flicker 2.5s ease-in-out infinite;
+#indicator::after {
+  content:"";
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:140px;
+  height:140px;
+  transform:translate(-50%, -50%);
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%);
 }
 
-/* TEXT */
 #indicator > div {
-	position:relative;
-	white-space:nowrap;
+  position:relative;
+  font-size:18px;
+  color:#d5c999;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  text-shadow:0 0 8px #38f5a2;
+  white-space:nowrap;
 }
 
-/* TERMINAL CURSOR */
-#indicator > div:after {
-	content:"_";
-	animation:blink 1s steps(1) infinite;
+#indicator > div::before {
+  content:"";
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:260px;
+  height:260px;
+  transform:translate(-50%, -50%) rotate(0deg);
+  border-radius:50%;
+  border:2px dashed rgba(213,201,153,0.4);
+  animation: sigil-spin 10s linear infinite reverse;
+  pointer-events:none;
 }
 
-/* ===== ANIMATIONS ===== */
-@keyframes spinCW {
-	to { transform:rotate(360deg); }
+#indicator > div::after {
+  content:"_";
+  animation: blink 1s steps(1) infinite;
 }
 
-@keyframes spinCCW {
-	to { transform:rotate(-360deg); }
+#lm {
+  opacity:0;
+  transition:opacity 0.5s;
 }
 
-@keyframes flicker {
-	0%,100% { opacity:0.6; }
-	50% { opacity:1; }
+@keyframes ring-spin {
+  from {
+    transform:translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform:translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes sigil-spin {
+  from {
+    transform:translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform:translate(-50%, -50%) rotate(360deg);
+  }
 }
 
 @keyframes blink {
-	0%,50% { opacity:1; }
-	51%,100% { opacity:0; }
+  0%,50% { opacity:1; }
+  51%,100% { opacity:0; }
 }
